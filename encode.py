@@ -1,8 +1,6 @@
 from precalculate import *
 
 
-a=[1,1,1,0,0,1,0,1,1,0,0,0,1,1,0,0,0,0,1,0,1,1,0,1,1,0,1,0,1,1,0,1]
-
 def rs_encode_msg(msg_in, nsym):
     if (len(msg_in) + nsym) > 255: raise ValueError("Message is too long (%i when max is 255)" % (len(msg_in)+nsym))
     gen = rs_generator_poly(nsym)
@@ -18,7 +16,6 @@ def rs_encode_msg(msg_in, nsym):
     msg_out[:len(msg_in)] = msg_in
     return msg_out
 
-# print rs_encode_msg(a,8),'0'
 
 def rs_calc_syndromes(msg, nsym):
     synd = [0] * nsym
@@ -26,8 +23,6 @@ def rs_calc_syndromes(msg, nsym):
         synd[i] = gf_poly_eval(msg, gf_pow(2,i))
     # synd = [i % 2 for i in synd]
     return [0] + synd
-# print rs_calc_syndromes([1,1,0,1,0,1,0],2)
-# print rs_calc_syndromes(rs_encode_msg(a,3),8),'1'
 
 
 def rs_check(msg, nsym):
