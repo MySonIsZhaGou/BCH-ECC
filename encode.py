@@ -21,7 +21,6 @@ def rs_calc_syndromes(msg, nsym):
     synd = [0] * nsym
     for i in range(0, nsym):
         synd[i] = gf_poly_eval(msg, gf_pow(2,i))
-    # synd = [i % 2 for i in synd]
     return [0] + synd
 
 
