@@ -53,8 +53,7 @@ def init_tables(prim=0x11d):
     for i in range(255, 512):
         gf_exp[i] = gf_exp[i - 255]
     return [gf_log, gf_exp]
-# init_tables()
-# print init_tables()[0],'\n',init_tables()[1]
+
 def gf_mul(x,y):
     if x==0 or y==0:
         return 0
@@ -94,7 +93,7 @@ def gf_poly_mul(p,q):
         for i in range(0, len(p)):
             r[i+j] ^= gf_mul(p[i], q[j])
     return r
-# print gf_poly_mul([1,1,0,1],[1,0,1,0])
+
 def gf_poly_eval(poly, x):
     if poly!=[]:
         y = poly[0]
@@ -102,7 +101,7 @@ def gf_poly_eval(poly, x):
             y = gf_mul(y, x) ^ poly[i]
         return y
     return
-# print gf_poly_eval([0,0,0,0,1,0,0,0,0],4),'2'
+
 
 def rs_generator_poly(nsym):
     g = [1]
@@ -110,11 +109,7 @@ def rs_generator_poly(nsym):
         g = gf_poly_mul(g, [1, gf_pow(2, i)])
         # g=[i%2 for i in g]
     return g
-# for i in range(20):
-#     print rs_generator_poly(i),len(rs_generator_poly(i))
-# b=[i%2 for i in a]
-# print a
-# print b
+
 
 def gf_poly_div(dividend, divisor):
     msg_out = list(dividend)
